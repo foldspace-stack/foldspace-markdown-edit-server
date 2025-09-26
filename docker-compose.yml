@@ -1,9 +1,17 @@
-version: '3'
-services:
-  foldspace-markdown-edit-server:
-    image: ghcr.io/foldspace-stack/foldspace-markdown-edit-server:latest
-    ports:
-      - "3010:3000"
-    volumes:
-      - ./docs:/app/docs
-    restart: unless-stopped
+  version: '3'
+  services:
+    foldspace-markdown-edit-server:
+      build: 
+        context: .
+        dockerfile: Dockerfile
+        args:
+        - build_id=${BUILD_ID:-1}
+      image: ghcr.io/foldspace-stack/foldspace-markdown-edit-server:latest
+      ports:
+        - "3010:80"
+      environment:
+        - BASIC_AUTH_USER=admin
+        - BASIC_AUTH_PASSWORD=admin
+      volumes:
+        - /Users/timger/Github/foldspace/foldspace-stack.github.io/docs/:/app/docs/foldspace-stack/
+      restart: unless-stopped
