@@ -1,0 +1,9 @@
+version: '3'
+services:
+  foldspace-markdown-edit-server:
+    image: ghcr.io/foldspace-stack/foldspace-markdown-edit-server:latest
+    ports:
+      - "3010:3000"
+    volumes:
+      - ./docs:/app/docs
+    restart: unless-stopped
